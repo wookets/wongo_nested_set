@@ -16,16 +16,16 @@ describe 'Hierarchy', ->
       done()
 
   it 'should set a root for the tree', (done) ->
-    root = {_type: 'MockHierarchy', name: 'Root'}
-    wongo_ns.setRoot root, (err, doc) ->
+    root = {name: 'Root'}
+    wongo_ns.setRoot 'MockHierarchy', root, (err, doc) ->
       root = doc
       assert.equal(doc.lft, 1)
       assert.equal(doc.rgt, 2)
       done()
 
   it 'should add a child to the root', (done) ->
-    child1 = {_type: 'MockHierarchy', name: 'child1'}
-    wongo_ns.addNode child1, root._id, (err, doc) ->
+    child1 = {name: 'child1'}
+    wongo_ns.addNode 'MockHierarchy', child1, root._id, (err, doc) ->
       child1 = doc
       assert.equal(doc.lft, 2)
       assert.equal(doc.rgt, 3)
@@ -39,8 +39,8 @@ describe 'Hierarchy', ->
       done()
   
   it 'should add a child to the child', (done) ->
-    child11 = {_type: 'MockHierarchy', name: 'child11'}
-    wongo_ns.addNode child11, child1._id, (err, doc) ->
+    child11 = {name: 'child11'}
+    wongo_ns.addNode 'MockHierarchy', child11, child1._id, (err, doc) ->
       child11 = doc
       assert.equal(doc.lft, 3)
       assert.equal(doc.rgt, 4)

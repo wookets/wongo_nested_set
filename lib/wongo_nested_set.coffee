@@ -15,32 +15,32 @@ exports.plugin = (schema, options) ->
   schema.index({rgt: 1}) 
   
   
-exports.setRoot = (root, callback) ->
+exports.setRoot = (_type, root, callback) ->
   root.parentId = null
   root.lft = 1
   root.rgt = 2
-  wongo.save(root, callback)
+  wongo.save(_type, root, callback)
 
-exports.addNode = (node, parentId, callback) ->
-  wongo.findById node._type, parentId, (err, parent) -> # find parent
+exports.addNode = (_type, node, parentId, callback) ->
+  wongo.findById _type, parentId, (err, parent) -> # find parent
     node.parentId = parentId # update node
     node.lft = parent.rgt
     node.rgt = node.lft + 1
     async.parallel [
       (done) -> # save node
-        wongo.save(node, done)
+        wongo.save(_type, node, done)
       (done) -> # update lefts
         where = {lft: {$gt: node.lft}}
         values = {$inc: {lft: 2, rgt: 2}}
-        wongo.update(node._type, where, values, done)
+        wongo.update(_type, where, values, done)
       (done) -> # update rights
         where = {lft: {$lt: node.lft}, rgt: {$gte: node.lft}}
         values = {$inc: {rgt: 2}}
-        wongo.update(node._type, where, values, done)
+        wongo.update(_type, where, values, done)
     ], (err, results) ->
       callback(err, results[0])
 
-exports.removeNode = (node, callback) ->
+exports.removeNode = (_type, node, callback) ->
   # TODO implement
   callback()
 
