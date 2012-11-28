@@ -1,6 +1,5 @@
 async = require 'async'
-
-wongo = require './wongo'
+wongo = require 'wongo'
 
 Schema = wongo.Schema
 

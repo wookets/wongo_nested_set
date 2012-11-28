@@ -1,5 +1,4 @@
-wongo_nested_set
-================
+# Wongo Nested Set
 
 The nested set pattern built on top of wongo
 
