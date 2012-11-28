@@ -5,8 +5,7 @@ Schema = wongo.Schema
 
 exports.plugin = (schema, options) ->
   options ?= {}
-  modelName = options.modelName
-
+  
   schema.add({lft: {type: Number, min: 0}}) 
   schema.add({rgt: {type: Number, min: 0}}) 
   schema.add({parentId: {type: Schema.ObjectId}}) 

@@ -1,5 +1,7 @@
 mongoose = require 'mongoose'
 
+wongo_ns = require '../lib/wongo_nested_set'
+
 Schema = mongoose.Schema
 ObjectId = Schema.ObjectId
 
@@ -11,5 +13,6 @@ mongoose.connect(db_config.url) # establish a database connection
 MockHierarchy = new Schema
   _type: {type: String, default: 'MockHierarchy', required: true}
   name: String
-MockHierarchy.plugin(wongo_ns.plugin, {modelName: 'MockHierarchy'})
+MockHierarchy.plugin(wongo_ns.plugin)
 mongoose.model 'MockHierarchy', MockHierarchy
+

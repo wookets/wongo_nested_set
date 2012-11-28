@@ -20,7 +20,7 @@
   "dependencies": {
     "mongoose": "3.4.0",
     "async": "0.1.22",
-    "wongo": "0.0.4"
+    "wongo": "0.0.8"
   },
   "devDependencies": {
     "mocha": "1.6.0"
