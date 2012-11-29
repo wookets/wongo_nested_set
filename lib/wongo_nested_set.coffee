@@ -1,7 +1,7 @@
 async = require 'async'
 wongo = require 'wongo'
 
-Schema = wongo.Schema
+Schema = wongo.mongoose.Schema
 
 exports.plugin = (schema, options) ->
   options ?= {}
