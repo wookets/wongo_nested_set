@@ -3,7 +3,7 @@
   "description": "The nested set hierarchy pattern built on top of wongo",
   "main": "./lib/wongo_nested_set",
   "author": "wookets",
-  "version": "0.0.9", 
+  "version": "0.2.0", 
   "repository": {
     "type": "git",
     "url": "http://github.com/wookets/wongo_nested_set.git"
@@ -18,11 +18,11 @@
     }
   ],
   "dependencies": {
-    "async": "0.1.22"
+    "async": "0.1.22",
+    "mongoose": "3.5.x",
+    "wongo": "0.2.x"
   },
   "devDependencies": {
-    "mocha": "1.6.0",
-    "mongoose": "3.4.0",
-    "wongo": "0.0.16"
+    "mocha": "1.6.0"
   }
 }

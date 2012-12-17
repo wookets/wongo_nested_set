@@ -85,6 +85,18 @@ describe 'Hierarchy', ->
       assert.equal(children[0].name, 'child1')
       done()
   
+  it 'should try to remove child1 and fail', (done) ->
+    wongo_ns.removeNode 'MockHierarchy', child1._id, (err) ->
+      assert.equal(err?.message, 'Only leaf nodes can be removed.')
+      done()
+  
+  it 'should remove child11', (done) ->
+    wongo_ns.removeNode 'MockHierarchy', child11._id, (err) ->
+      assert.ok(not err)
+      wongo_ns.findDescendants 'MockHierarchy', child1._id, (err, descendants) ->
+        assert.equal(descendants?.length, 0)
+        done()
+      
   after (done) -> 
     wongo.clear 'MockHierarchy', (err, result) -> # end with a fresh db
       done()
