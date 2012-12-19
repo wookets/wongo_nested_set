@@ -43,8 +43,10 @@ exports.removeNode = (_type, nodeId, callback) ->
   wongo.findById _type, nodeId, (err, node) ->
     if err then return callback(err)
     
+    if not node.lft or not node.rgt
+      return callback(new Error('Can not remove a node not in the nested set.'))
     if node.lft + 1 isnt node.rgt # dont allow removal of a node in the middle of the tree
-      return callback(new Error('Only leaf nodes can be removed.'))
+      return callback(new Error('Can not remove a node that has children.'))
   
     async.parallel [
       (done) -> # update all peer nodes to right

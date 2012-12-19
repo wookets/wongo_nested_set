@@ -87,7 +87,7 @@ describe 'Hierarchy', ->
   
   it 'should try to remove child1 and fail', (done) ->
     wongo_ns.removeNode 'MockHierarchy', child1._id, (err) ->
-      assert.equal(err?.message, 'Only leaf nodes can be removed.')
+      assert.equal(err?.message, 'Can not remove a node that has children.')
       done()
   
   it 'should remove child11', (done) ->
@@ -97,6 +97,11 @@ describe 'Hierarchy', ->
         assert.equal(descendants?.length, 0)
         done()
       
+  it 'should not remove a child that is not in the tree', (done) ->
+    wongo_ns.removeNode 'MockHierarchy', child11._id, (err) ->
+      assert.equal(err?.message, 'Can not remove a node not in the nested set.')
+      done()
+  
   after (done) -> 
     wongo.clear 'MockHierarchy', (err, result) -> # end with a fresh db
       done()
