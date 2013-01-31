@@ -6,7 +6,7 @@ exports.plugin = (schema, options) ->
   
   schema.add({lft: {type: Number}}) 
   schema.add({rgt: {type: Number}}) 
-  schema.add({parentId: {type: wongo.ObjectId}}) 
+  schema.add({parentId: {type: wongo.mongoose.Schema.ObjectId}}) 
 
   schema.index({parentId: 1}) 
   schema.index({lft: 1}) 
